@@ -20,14 +20,11 @@ from django.views.generic import TemplateView
 
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
     path(settings.ADMIN_URL, admin.site.urls),
     path("__debug__/", include("debug_toolbar.urls")),
+    path('accounts/', include('allauth.urls')),
 ]
 
-
-### include your apps urls below
-
 urlpatterns += [
-    #     path("<your_app_name>/", include("ecommerce-django.<your_app_name>.urls", namespace="<your_app_name>")),
+    path("", include("ecommerce-django.core.urls", namespace="core")),
 ]
