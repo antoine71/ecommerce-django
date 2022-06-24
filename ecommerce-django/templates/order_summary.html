@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+  <!--Main layout-->
+  <main>
+    {% if order %}
+      <div class="container pt-5">
+        <h2>Order Summary</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Item</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Unit Price</th>
+              <th scope="col">Total Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for order_item in order_items %}
+              <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>
+                  <a href="{{ order_item.item.get_absolute_url }}">{{ order_item.item.title }}</a>
+                </td>
+                <td>{{ order_item.quantity }}</td>
+                <td>{{ order_item.item.get_item_price }}</td>
+                <td>{{ order_item.get_order_item_price }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+    {% endif %}
+  </main>
+  <!--Main layout-->
+{% endblock content %}
